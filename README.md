@@ -19,10 +19,27 @@ Customer star ratings are misleading—25% of “neutral” ratings contain stro
 
 - Semi-supervised labeling using Zero-Shot Classification (0.85 confidence threshold).
 
-Transformer fine-tuning (DistilBERT, RoBERTa) enhanced with Focal Loss for class imbalance.
+- Transformer fine-tuning (DistilBERT, RoBERTa) enhanced with Focal Loss for class imbalance.
 
-Topic modeling using BERTopic (UMAP + HDBSCAN + MPNet embeddings).
+- Topic modeling using BERTopic (UMAP + HDBSCAN + MPNet embeddings).
 
-Impact Index quantifying how each topic influences customer satisfaction trends.
+- Impact Index quantifying how each topic influences customer satisfaction trends.
 
-Business insights revealing refund/frustration clusters as the largest negative driver post-COVID.
+- Business insights revealing refund/frustration clusters as the largest negative driver post-COVID.
+
+- ---
+
+## 🛠️ Technical Architecture
+
+The system is designed as a four-stage modular pipeline, ensuring reproducibility and scalability.
+
+```mermaid
+  graph TD
+      A[Raw Reviews] -->|Regex & Normalization| B(Data Cleaning)
+      B --> C{Zero-Shot Classification}
+      C -->|Confidence > 0.85| D[Silver Labels]
+      C -->|Confidence < 0.85| E[Discard/Manual]
+      D --> F[Fine-Tuning: DistilBERT + Focal Loss]
+      F --> G[BERTopic Modeling]
+      G --> H[Impact Index Dashboard]
+```
