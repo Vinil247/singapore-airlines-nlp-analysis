@@ -64,7 +64,7 @@ Actionable Insights Delivered
 - Addressed severe imbalance (70%/20%/10%) by focusing on hard examples
 - WandB tracking for loss curves, metrics, and hyperparameter comparisons
 
-**3. Topic Modeling + Impact Index**
+**3. Topic Modeling + Impact Index & Temporal Analysis**
 - BERTopic applied on transformer embeddings to extract themes:
   
 ```Impact Index = Topic Frequency (%) × Net Sentiment Score```
@@ -80,7 +80,7 @@ Actionable Insights Delivered
 - Semi-supervised: Scalable labeling for domain-specific applications
 - Focal Loss: Superior for imbalanced datasets compared to weighted CE
 - WandB: Reproducible experiments, easy comparison of DistilBERT vs. RoBERTa
-- BERTopic + Impact Index: Moves beyond accuracy to actionable business intelligence
+- BERTopic + Impact Index & Temporal: Moves beyond accuracy to actionable business intelligence
 
 
 
