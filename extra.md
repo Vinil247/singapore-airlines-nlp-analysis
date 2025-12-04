@@ -1,5 +1,10 @@
 # 🛫 Singapore Airlines Customer Review NLP Analysis
 #### **Semi-Supervised Sentiment Classification · Topic Modeling · BERTopic · MLOps**
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow)](https://huggingface.co/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red)](https://pytorch.org/)
+[![WandB](https://img.shields.io/badge/WandB-Experiment%20Tracking-orange)](https://wandb.ai/)
+<img src="https://img.shields.io/badge/BERTopic-Enabled-purple.svg"> </p>
 
 ## ✨ Summary
 This project builds a domain-specific sentiment analysis system for Singapore Airlines using 10K+ customer reviews (2018-2024). Using semi-supervised learning, we combined zero-shot pseudo-labeling with manual validation to create a high-quality training set, then fine-tuned transformer models (DistilBERT and RoBERTa) with Focal Loss to handle severe class imbalance. The pipeline integrates sentiment predictions with BERTopic to surface operational themes driving customer satisfaction over time, quantified through a custom Impact Index and temporal tracking, revealing distinct pre-pandemic and post-recovery customer experience shifts, quantified through net sentiment.
