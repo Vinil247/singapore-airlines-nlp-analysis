@@ -42,6 +42,25 @@ Premium carriers receive mostly positive reviews
 Negatives cluster around delays, seat comfort, communication gaps
 Mixed reviews combine great staff with service inconsistencies (meals, timing)
 
+
+## Top Business Insights (Impact Index)
+**Impact Index = Topic Frequency (%) × Net Sentiment Score**  
+
+| Topic                | Net Sentiment | Impact Index | Temporal Trend              |
+|----------------------|---------------|--------------|-----------------------------|
+| In-Flight Experience | +79           | +1,177       | Stable positive driver      |
+| Crew Professionalism | +88           | +1,023       | Improved post-pandemic      |
+| Refund Processing    | –91           | –612         | 15× spike during pandemic   |
+| Baggage Handling     | –65           | –287         | Worsened during recovery    |
+
+
+#### Topic Impact Bar Chart
+<img width="854" height="470" alt="image" src="https://github.com/user-attachments/assets/93c6c2d1-2c0e-4f13-8852-941fc595253c" />
+
+Positive values indicate strong satisfaction drivers; negative values highlight operational pain points.
+
+---
+
 ## Model Performance
 
 | Model                   | Accuracy | Macro-F1 | Training Time | Best For             |
@@ -66,17 +85,6 @@ Mixed reviews combine great staff with service inconsistencies (meals, timing)
 
 ---
 
-## Top Business Insights (Impact Index)
-
-| Topic                | Net Sentiment | Impact Index | Temporal Trend              |
-|----------------------|---------------|--------------|-----------------------------|
-| In-Flight Experience | +79           | +1,177       | Stable positive driver      |
-| Crew Professionalism | +88           | +1,023       | Improved post-pandemic      |
-| Refund Processing    | –91           | –612         | 15× spike during pandemic   |
-| Baggage Handling     | –65           | –287         | Worsened during recovery    |
-
-**Impact Index = Topic Frequency (%) × Net Sentiment Score**  
-Positive values indicate strong satisfaction drivers; negative values highlight operational pain points.
 
 ### WandB hyperparameter sweeps
 DistilBerta:
