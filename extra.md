@@ -77,10 +77,13 @@ Mixed reviews combine great staff with service inconsistencies (meals, timing)
 **Impact Index = Topic Frequency (%) × Net Sentiment Score**  
 Positive values indicate strong satisfaction drivers; negative values highlight operational pain points.
 
+### WandB hyperparameter sweeps
 DistilBerta:
+
 <img width="464" height="235" alt="image" src="https://github.com/user-attachments/assets/78013abd-03c2-4b54-985f-c889f8f92a3e" />
 
 Roberta:
+
 <img width="662" height="299" alt="image" src="https://github.com/user-attachments/assets/dc60bd15-c823-4372-86f7-c57b8b0608e5" />
 
 
