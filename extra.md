@@ -113,13 +113,16 @@ Roberta:
 - WandB tracking for loss curves, metrics, and hyperparameter comparisons
 
 **3. Topic Modeling + Impact Index & Temporal Analysis**
-- BERTopic applied on transformer embeddings to extract themes:
-  
-```Impact Index = Topic Frequency (%) × Net Sentiment Score```
 
+BERTopic applied on transformer embeddings to extract themes:
+ - Each topic was enriched with:
+   - Topic frequency
+   - Average predicted sentiment
+   - A simple Impact Index to rank customer-experience drivers
 
-
-
+     ```Impact Index = Topic Frequency (%) × Net Sentiment Score```
+- Temporal and cohort segmentation analysis
+  -  Pre & Post Covid Pandemic shifts
 
 **Why This Approach?**
 - Semi-supervised: Scalable labeling for domain-specific applications
@@ -130,28 +133,54 @@ Roberta:
 
 
 - ---
-## 🧱 Technical Architecture
-- ---
-```
-Raw Reviews (10K+)
-     ↓
-Data Cleaning & Aviation-Specific Normalization
-     ↓
-Semi-Supervised Labeling Pipeline
-     ├── Zero-Shot Classification (MPNet, confidence > 0.85)
-     ├── Manual Validation for Mixed/Borderline Cases
-     └── 8,200 High-Quality Training Samples
-     ↓
-Transformer Fine-Tuning (WandB Tracking)
-     ├── DistilBERT + Focal Loss (α=[0.3,1.5,2.0], γ=2)
-     ├── RoBERTa Baseline Comparison
-     └── Hyperparameter Optimization
-     ↓
-BERTopic Analysis
-     ├── MPNet Embeddings + UMAP + HDBSCAN
-     ├── 12 Consolidated Business Themes
-     └── Temporal Trend Analysis (2018-2024)
-     ↓
-Impact Index Calculation & Business Reporting
-```
+## 📂 Repository Structure
 
+```text
+.
+├── data/
+│   ├── raw_reviews.csv              # Original dataset
+│   └── labeled_dataset_0.85.csv     # "Silver Standard" dataset (with Mixed labels)
+├── notebooks/
+│   ├── 02_preprocessing.ipynb       # Zero-Shot Labeling & Hypothesis Testing
+│   ├── 03_distilbert_training.ipynb # Fine-tuning with Focal Loss & WandB
+│   ├── 04_roberta_training.ipynb    # RoBERTa Model Benchmarking
+│   └── 05_bertopic_analysis.ipynb   # Temporal Analysis & Impact Index
+├── models/
+│   └── [Link to HuggingFace Model]
+└── README.mdg
+```
+> Note: The DistilBERT and RoBERTa models are pushed to HuggingFace.
+
+### 🛠️ Tech Stack
+- ML Frameworks: PyTorch, Transformers, Scikit-learn
+- NLP Models: DistilBERT, RoBERTa, MPNet (zero-shot & embeddings)
+- MLOps: Weights & Biases (experiment tracking with parallel coordinates)
+- Analysis: BERTopic, UMAP, HDBSCAN, pandas, matplotlib
+- Temporal Analysis: Time-series decomposition, cohort analysis
+- Visualization: Parallel coordinates, confusion matrices
+
+- ---
+## 🚀 Quick Start
+Installation
+```bash
+pip install torch transformers datasets bertopic umap-learn wandb
+pip install scikit-learn pandas matplotlib seaborn
+```
+Python version: 3.10
+GPU used: Google Colab T4
+Inference Example
+```python
+
+from transformers import pipeline
+
+# Load fine-tuned model
+classifier = pipeline(
+    "sentiment-analysis",
+    model="YOUR-USERNAME/singapore-airlines-sentiment"
+)
+
+# Predict
+result = classifier("Crew was excellent but the delay was frustrating")
+
+# Output: {'label': 'MIXED', 'score': 0.87}
+```
