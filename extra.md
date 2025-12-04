@@ -53,14 +53,15 @@ Mixed reviews combine great staff with service inconsistencies (meals, timing)
 
 ---
 
-## Per-Class Performance (DistilBERT)
+## Per-Class Performance 
+### DistilBERT
 
 | Sentiment | Precision | Recall | F1-Score | Support | Key Insight                               |
 |----------|-----------|--------|---------|---------|--------------------------------------------|
 | Positive | 94.0%     | 94.7%  | 94.4%   | 1,500   | Strong baseline performance                |
 | Negative | 84.8%     | 85.3%  | 85.1%   | 600     | Reliable detection of complaints           |
 | Mixed    | 70.2%     | 66.7%  | 68.4%   | 300     | Critical: identified service inconsistencies |
-
+### RoBERTa
 **Note:** *The "Mixed" class was created from low-confidence zero-shot predictions where reviews expressed both positive and negative aspects.*
 
 ---
@@ -80,11 +81,12 @@ Positive values indicate strong satisfaction drivers; negative values highlight 
 ### WandB hyperparameter sweeps
 DistilBerta:
 
-<img width="464" height="235" alt="image" src="https://github.com/user-attachments/assets/78013abd-03c2-4b54-985f-c889f8f92a3e" />
+<img width="630" height="300" alt="image" src="https://github.com/user-attachments/assets/78013abd-03c2-4b54-985f-c889f8f92a3e" />
+
 
 Roberta:
 
-<img width="662" height="299" alt="image" src="https://github.com/user-attachments/assets/dc60bd15-c823-4372-86f7-c57b8b0608e5" />
+<img width="650" height="300" alt="image" src="https://github.com/user-attachments/assets/dc60bd15-c823-4372-86f7-c57b8b0608e5" />
 
 
 - ---
