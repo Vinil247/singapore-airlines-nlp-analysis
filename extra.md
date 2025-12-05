@@ -1,10 +1,10 @@
 # 🛫 Singapore Airlines Customer Review NLP Analysis
 #### **Semi-Supervised Sentiment Classification · Topic Modeling · BERTopic · MLOps**
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
-[![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow)](https://huggingface.co/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red)](https://pytorch.org/)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow)](https://huggingface.co/)
+[![BERTopic](https://img.shields.io/badge/BERTopic-Topic_Modeling-purple.svg)](https://bertopic.com//)
 [![WandB](https://img.shields.io/badge/WandB-Experiment%20Tracking-orange)](https://wandb.ai/)
-<img src="https://img.shields.io/badge/BERTopic-Enabled-purple.svg"> </p>
 
 ## ✨ Summary
 This project builds a domain-specific sentiment analysis system for Singapore Airlines using 10K+ customer reviews (2018-2024). Using semi-supervised learning, we combined zero-shot pseudo-labeling with manual validation to create a high-quality training set, then fine-tuned transformer models (DistilBERT and RoBERTa) with Focal Loss to handle severe class imbalance. The pipeline integrates sentiment predictions with BERTopic to surface operational themes driving customer satisfaction over time, quantified through a custom Impact Index and temporal tracking, revealing distinct pre-pandemic and post-recovery customer experience shifts, quantified through net sentiment.
@@ -51,12 +51,17 @@ Mixed reviews combine great staff with service inconsistencies (meals, timing)
 ## Top Business Insights (Impact Index)
 **Impact Index = Topic Frequency (%) × Net Sentiment Score**  
 
-| Topic                | Net Sentiment | Impact Index | Temporal Trend              |
-|----------------------|---------------|--------------|-----------------------------|
-| In-Flight Experience | +79           | +1,177       | Stable positive driver      |
-| Crew Professionalism | +88           | +1,023       | Improved post-pandemic      |
-| Refund Processing    | –91           | –612         | 15× spike during pandemic   |
-| Baggage Handling     | –65           | –287         | Worsened during recovery    |
+| Topic | Net Sentiment | Impact Index | Temporal Trend |
+|--------|--------------|--------------|----------------|
+| **In-Flight Experience & Crew** | +78.9 | **+1,545** | Strong, stable positive driver |
+| **Brand Reputation (SQ)** | +76.6 | **+1,053** | Slight decline post-COVID but still high |
+| **Service & Recommendations** | +87.9 | **+758** | Increasingly positive after 2022 |
+| **Australian Routes** | +64.3 | **+678** | Recovered well post-pandemic |
+| **Changi Airport Experience** | +76.7 | +125 | Steady satisfaction driver |
+| **Crew Commendations** | +95.3 | +116 | Clear service strengths |
+| **Baggage Handling Issues** | -77.3 | -142 | Long-standing operational pain point |
+| **In-Flight Service Incidents** | -78.1 | -373 | Noticeable during recovery period |
+| **Booking/Refund & Customer Service** | -91.5 | **-510** | Peaked during COVID; top negative driver |
 
 
 #### Topic Impact Bar Chart
@@ -85,7 +90,29 @@ Positive values indicate strong satisfaction drivers; negative values highlight 
 | Positive | 94.0%     | 94.7%  | 94.4%   | 1,500   | Strong baseline performance                |
 | Negative | 84.8%     | 85.3%  | 85.1%   | 600     | Reliable detection of complaints           |
 | Mixed    | 70.2%     | 66.7%  | 68.4%   | 300     | Critical: identified service inconsistencies |
+
+| Sentiment | Precision | Recall | F1-Score | Support | Insight |
+|-----------|-----------|--------|----------|----------|---------|
+| Positive | 0.97 | 0.91 | 0.94 | 1214 | Confident detection of praise |
+| Negative | 0.95 | 0.89 | 0.92 | 482 | Strong complaint detection |
+| Mixed | 0.60 | 0.79 | 0.68 | 304 | Recovers mixed reviews created via zero-shot low-confidence filtering |
+
+| **Accuracy** | — | — | **0.89** | 2000 | |
+| **Macro Avg** | — | — | **0.85** | — | |
+| **Weighted Avg** | — | — | **0.89** | — | |
+
 ### RoBERTa
+| Sentiment | Precision | Recall | F1-Score | Support | Insight |
+|-----------|-----------|--------|----------|---------|---------|
+| Positive | 0.96 | 0.94 | 0.95 | 1214 | Best-in-class stability |
+| Negative | 0.93 | 0.91 | 0.92 | 482 | Robust across all complaint types |
+| Mixed | 0.66 | 0.76 | 0.71 | 304 | Improved recognition of dual-polarity reviews |
+
+
+| **Accuracy** |  **0.90** | 2000 
+| **Macro Avg** | **0.86** 
+| **Weighted Avg** | **0.91** |
+
 **Note:** *The "Mixed" class was created from low-confidence zero-shot predictions where reviews expressed both positive and negative aspects.*
 
 ---
