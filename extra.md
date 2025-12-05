@@ -85,49 +85,36 @@ Positive values indicate strong satisfaction drivers; negative values highlight 
 ## Per-Class Performance 
 ### DistilBERT
 
-| Sentiment | Precision | Recall | F1-Score | Support | Key Insight                               |
-|----------|-----------|--------|---------|---------|--------------------------------------------|
-| Positive | 94.0%     | 94.7%  | 94.4%   | 1,500   | Strong baseline performance                |
-| Negative | 84.8%     | 85.3%  | 85.1%   | 600     | Reliable detection of complaints           |
-| Mixed    | 70.2%     | 66.7%  | 68.4%   | 300     | Critical: identified service inconsistencies |
-
 | Sentiment | Precision | Recall | F1-Score | Support | Insight |
 |-----------|-----------|--------|----------|----------|---------|
-| Positive | 0.97 | 0.91 | 0.94 | 1214 | Confident detection of praise |
-| Negative | 0.95 | 0.89 | 0.92 | 482 | Strong complaint detection |
-| Mixed | 0.60 | 0.79 | 0.68 | 304 | Recovers mixed reviews created via zero-shot low-confidence filtering |
+| Positive | 97% | 91% | 94% | 1214 | Confident detection of praise |
+| Negative | 95% | 89% | 92% | 482 | Strong complaint detection |
+| Mixed | 60% | 79% | 68% | 304 | Recovers mixed reviews created via zero-shot low-confidence filtering |
 
-| **Accuracy** | — | — | **0.89** | 2000 | |
-| **Macro Avg** | — | — | **0.85** | — | |
-| **Weighted Avg** | — | — | **0.89** | — | |
+- **Accuracy** : **89%** 
+- **Macro Avg**: **85%** 
+- **Weighted Avg** : **89%**
+
+#### WandB hyperparameter sweeps
+<img width="630" height="300" alt="image" src="https://github.com/user-attachments/assets/78013abd-03c2-4b54-985f-c889f8f92a3e" />
 
 ### RoBERTa
 | Sentiment | Precision | Recall | F1-Score | Support | Insight |
 |-----------|-----------|--------|----------|---------|---------|
-| Positive | 0.96 | 0.94 | 0.95 | 1214 | Best-in-class stability |
-| Negative | 0.93 | 0.91 | 0.92 | 482 | Robust across all complaint types |
-| Mixed | 0.66 | 0.76 | 0.71 | 304 | Improved recognition of dual-polarity reviews |
+| Positive | 96% | 94% | 95% | 1214 | Best-in-class stability |
+| Negative | 93% | 91% | 92% | 482 | Robust across all complaint types |
+| Mixed | 66% | 76% | 71% | 304 | Improved recognition of dual-polarity reviews |
 
 
-| **Accuracy** |  **0.90** | 2000 
-| **Macro Avg** | **0.86** 
-| **Weighted Avg** | **0.91** |
+- **Accuracy** :  **90%** 
+- **Macro Avg** : **86%** 
+- **Weighted Avg** : **91%** 
+
+#### WandB hyperparameter sweeps
+<img width="630" height="300" alt="image" src="https://github.com/user-attachments/assets/dc60bd15-c823-4372-86f7-c57b8b0608e5" />
+
 
 **Note:** *The "Mixed" class was created from low-confidence zero-shot predictions where reviews expressed both positive and negative aspects.*
-
----
-
-
-### WandB hyperparameter sweeps
-DistilBerta:
-
-<img width="630" height="300" alt="image" src="https://github.com/user-attachments/assets/78013abd-03c2-4b54-985f-c889f8f92a3e" />
-
-
-Roberta:
-
-<img width="650" height="300" alt="image" src="https://github.com/user-attachments/assets/dc60bd15-c823-4372-86f7-c57b8b0608e5" />
-
 
 - ---
 
