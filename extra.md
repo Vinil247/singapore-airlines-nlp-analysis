@@ -7,9 +7,9 @@
 [![WandB](https://img.shields.io/badge/WandB-Experiment%20Tracking-orange)](https://wandb.ai/)
 
 ## ✨ Summary
-This project builds a domain-specific sentiment analysis system for Singapore Airlines using 10K+ customer reviews (2018-2024). Using semi-supervised learning, we combined zero-shot pseudo-labeling with manual validation to create a high-quality training set, then fine-tuned transformer models (DistilBERT and RoBERTa) with Focal Loss to handle severe class imbalance. The pipeline integrates sentiment predictions with BERTopic to surface operational themes driving customer satisfaction over time, quantified through a custom Impact Index and temporal tracking, revealing distinct pre-pandemic and post-recovery customer experience shifts, quantified through net sentiment.
+This project builds a domain-specific sentiment analysis system for Singapore Airlines using 10K+ customer reviews (2018-2024).Using semi-supervised learning, the pipeline combines zero-shot pseudo-labeling with a confidence-based automated refinement step to construct a high-quality, domain-aware dataset with three sentiment classes: Positive, Negative, and Mixed. Transformer models (DistilBERT and RoBERTa) were fine-tuned using Focal Loss to address class imbalance and tracked with Weights & Biases for full reproducibility and experiment comparison. Sentiment outputs were integrated with BERTopic to identify operational themes, compute a custom Impact Index, and analyze pre- and post-pandemic sentiment trends, revealing measurable shifts in customer experience across key service points.
 
-Complete with WandB experiment tracking and modular design, this demonstrates an end-to-end applied NLP workflow from data preparation to actionable business insights
+> Demonstrating an end-to-end applied NLP workflow from data preparation to actionable business insights.
 
 - ---
 
@@ -121,20 +121,23 @@ Positive values indicate strong satisfaction drivers; negative values highlight 
 ## 🧠 Modeling Approach
 
 **1. Semi-Supervised Pseudo-Labeling**
-- After determining rating as unreliable projcet used MPNet zero-shot classifier for initial labeling
-- Applied 0.85 confidence threshold for high-precision labels
-- Manual validation of ambiguous cases introduced "mixed sentiment" category
-  - The Mixed Sentiment Hypothesis
-    When analyzing zero-shot confidence scores, we observed a pattern:
-    - High confidence (≥0.85): Clear positive/negative sentiment
-    - Low confidence (0.5-0.85): Text containing both praise and complaints
-    > Example: *"The crew was amazing but the 5-hour delay was unacceptable"*
-    
-    Our approach:
-    
-    - Treat low-confidence predictions as potential mixed sentiment
-    - Manual validation using randome sampling confirmed tone were indeed mixed (not neutral)
-    - Formalized as third class for fine-tuning
+1. Semi-Supervised Pseudo-Labeling (Automated + Confidence-Based)
+
+- Rating data proved unreliable, so initial sentiment labels were generated using MPNet zero-shot classification.
+- A 0.85 confidence threshold ensured high-precision assignments for Positive/Negative.
+- No human annotation loop was used. Instead:
+  - Low-confidence cases (<0.85) were automatically flagged as ambiguous.
+  - These samples consistently contained both positive and negative expressions, supporting the Mixed Sentiment Hypothesis.
+
+#### The Mixed Sentiment Hypothesis
+
+During early analysis, we observed a consistent pattern:
+  - High zero-shot confidence (≥ 0.85) → Clearly positive or negative reviews
+  - Low confidence (0.50–0.85) → Reviews mixing praise and complaints
+  > Example: "The crew was amazing but the 5-hour delay was unacceptable."
+
+A small random audit confirmed that low-confidence samples were genuinely mixed rather than neutral.
+This justified formalizing Mixed Sentiment as a third supervised class for fine-tuning.
 
  #### **Produced clean, domain-specific dataset without exhaustive manual labeling**
 
@@ -216,3 +219,6 @@ result = classifier("Crew was excellent but the delay was frustrating")
 
 # Output: {'label': 'MIXED', 'score': 0.87}
 ```
+
+## Future notes:
+- Unlike a traditional human-in-the-loop validation pipeline, this project relied entirely on automated threshold-based rules rather than manual annotation. Incorporating HITL in future iterations could further improve Mixed-class separability.
