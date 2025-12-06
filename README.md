@@ -120,8 +120,7 @@ Positive values indicate strong satisfaction drivers; negative values highlight 
 
 ## 🧠 Modeling Approach
 
-**1. Semi-Supervised Pseudo-Labeling**
-1. Semi-Supervised Pseudo-Labeling (Automated + Confidence-Based)
+### **1. Semi-Supervised Pseudo-Labeling (Automated + Confidence-Based)**
 
 - Rating data proved unreliable, so initial sentiment labels were generated using MPNet zero-shot classification.
 - A 0.85 confidence threshold ensured high-precision assignments for Positive/Negative.
@@ -141,13 +140,13 @@ This justified formalizing Mixed Sentiment as a third supervised class for fine-
 
  #### **Produced clean, domain-specific dataset without exhaustive manual labeling**
 
-**2. Fine-Tuning with Focal Loss**
+### **2. Fine-Tuning with Focal Loss**
 - 3-class classification: positive, negative, mixed
 - Custom Focal Loss with class-balanced α values (not external weighting)
 - Addressed severe imbalance (70%/20%/10%) by focusing on hard examples
 - WandB tracking for loss curves, metrics, and hyperparameter comparisons
 
-**3. Topic Modeling + Impact Index & Temporal Analysis**
+### **3. Topic Modeling + Impact Index & Temporal Analysis**
 
 BERTopic applied on transformer embeddings to extract themes:
  - Each topic was enriched with:
@@ -159,7 +158,7 @@ BERTopic applied on transformer embeddings to extract themes:
 - Temporal and cohort segmentation analysis
   -  Pre & Post Covid Pandemic shifts
 
-**Why This Approach?**
+### **Why This Approach?**
 - Semi-supervised: Scalable labeling for domain-specific applications
 - Focal Loss: Superior for imbalanced datasets compared to weighted CE
 - WandB: Reproducible experiments, easy comparison of DistilBERT vs. RoBERTa
