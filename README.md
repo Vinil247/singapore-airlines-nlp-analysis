@@ -43,9 +43,10 @@ Actionable Insights Delivered
 Real Customer Patterns Validated
 Topic analysis revealed patterns consistent with aviation industry:
 
-Premium carriers receive mostly positive reviews
-Negatives cluster around delays, seat comfort, communication gaps
-Mixed reviews combine great staff with service inconsistencies (meals, timing)
+* Premium carriers receive mostly positive reviews.
+* Negatives cluster around delays, seat comfort, communication gaps.
+* Mixed reviews combine great staff with service inconsistencies (meals, timing).
+
 
 
 ## Top Business Insights (Impact Index)
@@ -77,8 +78,8 @@ Positive values indicate strong satisfaction drivers; negative values highlight 
 |-------------------------|----------|----------|----------------|-----------------------|
 | VADER (baseline)        | 68.2%    | 51.4%    | –              | Quick prototyping     |
 | TextBlob                | 71.5%    | 55.8%    | –              | General sentiment     |
-| DistilBERT + Focal Loss | 90.1%    | 82.0%    | 2.1h           | Production deployment |
-| RoBERTa + Focal Loss    | 91.3%    | 83.2%    | 4.5h           | Maximum accuracy      |
+| DistilBERT + Focal Loss | 90.1%    | 82.0%    | 10 min           | Production deployment |
+| RoBERTa + Focal Loss    | 91.3%    | 83.2%    | 25 min           | Maximum accuracy      |
 
 ---
 
@@ -131,7 +132,7 @@ Positive values indicate strong satisfaction drivers; negative values highlight 
 #### The Mixed Sentiment Hypothesis
 
 During early analysis, we observed a consistent pattern:
-  - High zero-shot confidence (≥ 0.85) → Clearly positive or negative reviews
+  - High zero-shot confidence (> 0.85) → Clearly positive or negative reviews
   - Low confidence (0.50–0.85) → Reviews mixing praise and complaints
   > Example: "The crew was amazing but the 5-hour delay was unacceptable."
 
@@ -143,7 +144,7 @@ This justified formalizing Mixed Sentiment as a third supervised class for fine-
 ### **2. Fine-Tuning with Focal Loss**
 - 3-class classification: positive, negative, mixed
 - Custom Focal Loss with class-balanced α values (not external weighting)
-- Addressed severe imbalance (70%/20%/10%) by focusing on hard examples
+- Addressed severe imbalance (70% / 20% / 10%) by focusing on hard examples
 - WandB tracking for loss curves, metrics, and hyperparameter comparisons
 
 ### **3. Topic Modeling + Impact Index & Temporal Analysis**
@@ -180,7 +181,7 @@ BERTopic applied on transformer embeddings to extract themes:
 │   ├── 04_roberta_training.ipynb    # RoBERTa Model Benchmarking
 │   └── 05_bertopic_analysis.ipynb   # Temporal Analysis & Impact Index
 ├── models/
-│   └── [Link to HuggingFace Model]
+│   └── Model_Link.txt               # Link to HuggingFace Models
 └── README.mdg
 ```
 > Note: The DistilBERT and RoBERTa models are pushed to HuggingFace.
@@ -210,7 +211,7 @@ from transformers import pipeline
 # Load fine-tuned model
 classifier = pipeline(
     "sentiment-analysis",
-    model="YOUR-USERNAME/singapore-airlines-sentiment"
+    model="Yoshaaa7/distilbert-SGairline-sentiment-private"
 )
 
 # Predict
